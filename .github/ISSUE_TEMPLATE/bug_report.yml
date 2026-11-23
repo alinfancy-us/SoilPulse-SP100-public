@@ -1,0 +1,64 @@
+name: Integration or usage question
+description: Home Assistant setup, BTHome discovery, GATT reads and writes, or an automation that does not work
+title: "[Integration]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository documents how to use SP100. Firmware and dashboard source are not here, so we cannot debug device software through an issue.
+
+        **Hardware failure is out of scope here.** If the sensor will not power on, has a damaged probe, or arrived faulty, contact the retailer or email support@alinfancy.com. Issues here are public and cannot replace a warranty claim.
+
+        Before posting, check [troubleshooting.md](/docs/troubleshooting.md) and the existing issues. Do not include serial numbers, your address or any credentials.
+  - type: input
+    id: goal
+    attributes:
+      label: What are you trying to do?
+      description: The integration or task you are working on
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include the exact error or unexpected behaviour
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Sensor firmware version
+      description: Shown under Device Information in the dashboard, or in Home Assistant
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Home Assistant
+        - Web Bluetooth dashboard
+        - Own tool using the GATT interface
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Software version
+      description: Home Assistant version, or browser and operating system for the dashboard
+    validations:
+      required: false
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps, and the point where it stopped working
+    validations:
+      required: false
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you already tried?
+    validations:
+      required: false

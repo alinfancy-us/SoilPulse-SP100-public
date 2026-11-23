@@ -1,0 +1,22 @@
+# Replace: replace sensor.soilpulse_moisture with the entity ID created by your BTHome integration.
+# Replace: replace notify.mobile_app_<your_phone> with your notification service.
+alias: SoilPulse low moisture alert
+description: Notify when the probe stays dry for 15 minutes
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.soilpulse_moisture
+    below: 20
+    for:
+      minutes: 15
+condition:
+  - condition: numeric_state
+    entity_id: sensor.soilpulse_battery
+    above: 15
+action:
+  - service: notify.mobile_app_<your_phone>
+    data:
+      title: SoilPulse SP100
+      message: >-
+        Soil moisture is {{ states('sensor.soilpulse_moisture') }}%.
+        Check the plant.
+mode: single

@@ -1,0 +1,43 @@
+name: Documentation correction
+description: A wrong value, a stale screenshot, a broken link, or a step that needs fixing
+title: "[Docs]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for catching it. Point to the exact file and line so we can verify and fix it.
+
+        This tracker covers documentation and integration examples only. Hardware faults and firmware feature requests are out of scope here; see [CONTRIBUTING.md](/CONTRIBUTING.md). Do not include serial numbers or private details.
+  - type: input
+    id: location
+    attributes:
+      label: File and section
+      description: For example, docs/webble-gatt.md, GATT services table
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is wrong?
+      description: Quote the current text and explain the problem
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of problem
+      options:
+        - Incorrect value or command
+        - Outdated screenshot or image
+        - Broken link
+        - Missing or unclear step
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested correction
+      description: The wording or value you believe is right, and how you verified it
+    validations:
+      required: false

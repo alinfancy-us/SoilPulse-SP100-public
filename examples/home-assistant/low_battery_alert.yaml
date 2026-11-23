@@ -1,0 +1,29 @@
+# Replace: replace sensor.soilpulse_battery with the entity ID created by your BTHome integration.
+# Replace: replace notify.mobile_app_<your_phone> with your notification service.
+# Replace: create input_datetime.soilpulse_last_battery_notice (date and time) to throttle alerts.
+# Note: 20% is an example threshold you can adjust. The sensor reports 0% when the battery is empty.
+alias: SoilPulse low battery alert
+description: Notify once per day when battery drops below an example 20 percent threshold
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.soilpulse_battery
+    below: 20
+    for:
+      minutes: 10
+condition:
+  - condition: template
+    value_template: >-
+      {{ (as_timestamp(now()) - (state_attr('input_datetime.soilpulse_last_battery_notice', 'timestamp') | default(0))) > 86400 }}
+action:
+  - service: notify.mobile_app_<your_phone>
+    data:
+      title: SoilPulse SP100
+      message: >-
+        Battery is at {{ states('sensor.soilpulse_battery') }}%.
+        Replace the two AAA cells.
+  - service: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.soilpulse_last_battery_notice
+    data:
+      timestamp: "{{ as_timestamp(now()) }}"
+mode: single
